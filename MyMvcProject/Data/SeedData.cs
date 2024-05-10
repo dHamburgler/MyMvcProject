@@ -82,11 +82,11 @@ namespace MyMvcProject.Data
 
                     me = new ApplicationUser
                     {
-                        Id = "23457890-1937-421b-8e0e-6001d8785140", // primary key
-                        UserName = "barbary@hotmail.com",
-                        NormalizedUserName = "BARBARY@HOTMAIL.COM",
-                        Email = "barbary@hotmail.com",
-                        NormalizedEmail = "BARBARY@HOTMAIL.COM",
+                        Id = "13457890-1937-421b-8e0e-6001d8785140", // primary key
+                        UserName = "test@hotmail.com",
+                        NormalizedUserName = "TEST@HOTMAIL.COM",
+                        Email = "test@hotmail.com",
+                        NormalizedEmail = "TEST@HOTMAIL.COM",
                         PasswordHash = hasher.HashPassword(null, "123.Donkey")
                     };
                     var results = await _userManager.CreateAsync(me);
