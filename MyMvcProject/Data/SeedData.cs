@@ -32,32 +32,20 @@ namespace MyMvcProject.Data
             {
                 return;   // DB has been seeded
             }
-            var events = new Party[]
-                {
-                    new Party()
-                    {
-                        Name = "Big Party 1",
-                        ImageFileName = "party.jpg",
-                        Description = "Description of the massive party. Description of the massive party.Description of the massive party.Description of the massive party.",
-                        Created = DateTime.Now
-                    },
-                    new Party()
-                    {
-                        Name = "Big Party 2",
-                        ImageFileName = "party.jpg",
-                        Description = "Description of the massive party. Description of the massive party.Description of the massive party.Description of the massive party.",
-                        Created = DateTime.Now
-                    },
-                    new Party()
-                    {
-                        Name = "Big Party 3",
-                        ImageFileName = "party.jpg",
-                        Description = "Description of the massive party. Description of the massive party.Description of the massive party.Description of the massive party.",
-                        Created = DateTime.Now
-                    },
-                };
 
-            context.Parties.AddRange(events);
+            var parties = new List<Party>();
+            for (int i = 0; i < 20; i++)
+            {
+                parties.Add(new Party()
+                {
+                    Name = $"Big Party {i}",
+                    ImageFileName = "party.jpg",
+                    Description = "Description of the massive party. Description of the massive party.Description of the massive party.Description of the massive party.",
+                    Created = DateTime.Now
+                });
+            }
+
+            context.Parties.AddRange(parties);
             context.SaveChanges();
         }
 

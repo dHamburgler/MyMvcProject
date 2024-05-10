@@ -36,20 +36,25 @@ namespace MyMvcProject.Controllers
             {
                 return NotFound();
             }
+
+            // look up party in the db
             var party = await _context.Parties.FindAsync(id);
             if (party == null)
             {
                 return NotFound();
             }
             
+            // get user from DB
             var user = await _userManager.GetUserAsync(User);
             var guests = party.Guests.ToList();
 
+            // check if the guest already has joined the group
             var exists = _context.Parties.Any(x => x.Id == party.Id && x.Guests.Any(g => g.Id == user.Id));
             if (exists == false)
             {
                 party.Guests.Add(user);
             }
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
