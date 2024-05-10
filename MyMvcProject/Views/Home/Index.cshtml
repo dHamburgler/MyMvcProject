@@ -1,0 +1,32 @@
+﻿@using System.Security.Claims
+@model List<Party>
+
+@{
+    ViewData["Title"] = "Party Page";
+}
+
+
+<div class="d-flex flex-row">
+    @foreach (var item in Model)
+    {
+        <div class="card mx-auto" style="width: 18rem;">
+            <img class="card-img-top" src="/Uploads/@item.ImageFileName" alt="Big party">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                @if(User.Identity.IsAuthenticated == false)
+                {
+                    <button type="button" class="btn btn-secondary btn-lg" disabled>You must login to join</button>
+                }
+                else if (item.Guests.Any(x => x.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                {
+                    <a asp-action="Unjoin" asp-route-id="@item.Id" class="btn btn-danger">Unjoin</a>
+                }
+                else
+                {
+                    <a asp-action="Join" asp-route-id="@item.Id" class="btn btn-success">Join</a>
+                }
+            </div>
+        </div>
+    }
+</div>
